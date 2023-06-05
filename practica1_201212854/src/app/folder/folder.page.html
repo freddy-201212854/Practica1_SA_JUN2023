@@ -1,0 +1,58 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title *ngIf="folder=='inbox'">API REST</ion-title>
+    <ion-title *ngIf="folder=='outbox'">API SOAP</ion-title>  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid *ngIf="folder=='inbox'">
+    <ion-row>
+      <ion-col size="6">
+        Name
+      </ion-col>
+      <ion-col size="6">
+        URL de detalle
+      </ion-col>
+    </ion-row>
+    <ion-row *ngFor="let list of listPokemones | paginate: config"> 
+      <ion-col size="6">{{ list.name }}</ion-col>
+      <ion-col size="6">{{ list.url }}</ion-col>
+    </ion-row>
+    <ion-row>
+      <pagination-controls
+      class="custom-pagination"
+      [previousLabel]="'Anterior'"
+      [nextLabel]="'Siguiente'"
+      (pageChange)="pageChanged($event)"
+    >
+    </pagination-controls>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid *ngIf="folder=='outbox'">
+    <ion-row>
+      <ion-col size="6">
+        Name
+      </ion-col>
+      <ion-col size="6">
+        Capital
+      </ion-col>
+    </ion-row>
+    <ion-row *ngFor="let list of listCountrys | paginate: config2"> 
+      <ion-col size="6">{{ list.name }}</ion-col>
+      <ion-col size="6">{{ list.capital }}</ion-col>
+    </ion-row>
+    <ion-row>
+      <pagination-controls
+      class="custom-pagination"
+      [previousLabel]="'Anterior'"
+      [nextLabel]="'Siguiente'"
+      (pageChange)="pageChanged2($event)"
+    >
+    </pagination-controls>
+    </ion-row>
+  </ion-grid>
+</ion-content>
